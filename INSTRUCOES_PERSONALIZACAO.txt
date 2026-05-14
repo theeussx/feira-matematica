@@ -1,0 +1,92 @@
+================================================================================
+AR MATHEMATICS FAIR - GUIA DE PERSONALIZACAO
+================================================================================
+
+ADICIONAR FOTOS DOS PARTICIPANTES
+================================================================================
+
+1. Coloque as 5 fotos dos participantes na pasta:
+   client/public/participants/
+
+2. Nomeie os arquivos como:
+   - participant-1.jpg
+   - participant-2.jpg
+   - participant-3.jpg
+   - participant-4.jpg
+   - participant-5.jpg
+
+3. Abra o arquivo: client/src/pages/Participants.tsx
+
+4. Encontre o array "participants" e atualize com os dados:
+
+   const participants = [
+     {
+       id: 1,
+       name: "Nome do Participante 1",
+       role: "Funcao/Cargo",
+       image: "/participants/participant-1.jpg",
+     },
+     {
+       id: 2,
+       name: "Nome do Participante 2",
+       role: "Funcao/Cargo",
+       image: "/participants/participant-2.jpg",
+     },
+     // ... continue para os outros 3
+   ];
+
+5. Salve o arquivo e as fotos aparecerão automaticamente
+
+================================================================================
+ESTRUTURA DO PROJETO
+================================================================================
+
+ar-math-fair/
+├── client/
+│   ├── public/
+│   │   └── participants/          ← Coloque as fotos aqui
+│   └── src/
+│       ├── pages/
+│       │   ├── Home.tsx           (Página inicial)
+│       │   ├── Sensors.tsx        (Aba Sensores)
+│       │   ├── Math.tsx           (Aba Matemática)
+│       │   ├── Demo.tsx           (Aba Demonstração)
+│       │   ├── Quiz.tsx           (Aba Quiz)
+│       │   └── Participants.tsx   (Aba Participantes)
+│       └── components/            (Componentes)
+└── README_SETUP.md                (Guia completo)
+
+================================================================================
+ROTAS/ABAS DISPONÍVEIS
+================================================================================
+
+/                  Página inicial (Hero + O que é AR)
+/sensors           Aba de Sensores
+/math              Aba de Matemática
+/demo              Aba de Demonstração
+/quiz              Aba de Quiz
+/participants      Aba de Participantes
+
+================================================================================
+COMANDOS ÚTEIS
+================================================================================
+
+pnpm install       Instalar dependências
+pnpm dev           Iniciar servidor (localhost:3000)
+pnpm build         Compilar para produção
+
+================================================================================
+EDITAR CONTEÚDO
+================================================================================
+
+Home:              client/src/pages/Home.tsx
+Sensores:          client/src/components/SensorsSection.tsx
+Matemática:        client/src/components/MathSection.tsx
+Demonstração:      client/src/components/S20DemoSection.tsx
+Quiz:              client/src/components/QuizSection.tsx
+Participantes:     client/src/pages/Participants.tsx
+
+================================================================================
+
+Desenvolvido para a Feira de Matemática 2026
+
