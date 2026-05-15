@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-foreground mb-3">Sobre o Projeto</h3>
             <p className="text-sm text-muted-foreground">
-              Uma Feira de Matemática que explora como a Realidade Aumentada usa matemática e sensores para entender o mundo.
+              Uma Feira de Matemática que explora como a Realidade Aumentada usa matemática e sensores para entender o mundo ao redor.
             </p>
           </div>
 

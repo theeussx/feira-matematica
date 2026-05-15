@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 interface HeroSectionProps {
   onExplore?: () => void;
+  logoSrc?: string | null;
 }
 
 export default function HeroSection({ onExplore }: HeroSectionProps) {
@@ -17,14 +18,11 @@ export default function HeroSection({ onExplore }: HeroSectionProps) {
 
       {/* Conteúdo */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center max-w-4xl">
-        {/* Subtítulo animado */}
-        <div className="inline-block mb-6 px-4 py-2 bg-primary/10 rounded-full border border-primary/30 animate-fade-in-up">
-          <p className="text-sm font-semibold text-primary">🚀 Feira de Matemática 2026</p>
-        </div>
+       
 
         {/* Título principal */}
         <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-          Como celulares conseguem entender o espaço usando{" "}
+          Como os celulares conseguem entender o espaço usando {" "}
           <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             matemática?
           </span>
@@ -44,13 +42,7 @@ export default function HeroSection({ onExplore }: HeroSectionProps) {
           >
             Explorar Projeto
           </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="px-8 py-6 text-lg font-semibold border-2 border-foreground/20 hover:border-primary hover:bg-primary/5 transition-all"
-          >
-            Saiba Mais
-          </Button>
+          
         </div>
       </div>
 

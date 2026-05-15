@@ -2,12 +2,16 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useLocation } from "wouter";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 
-export default function Header() {
+interface HeaderProps {
+  logoSrc: string | null;
+  onLogoUpload: (file: File | null) => void;
+}
+
+export default function Header({ logoSrc, onLogoUpload }: HeaderProps) {
   const [, navigate] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logo, setLogo] = useState<string | null>(null);
 
   const navItems = [
     { label: "Início", path: "/" },
@@ -23,12 +27,9 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
-  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const url = URL.createObjectURL(file);
-    setLogo(url);
+  const handleLogoUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    onLogoUpload(file);
   };
 
   return (
@@ -40,17 +41,17 @@ export default function Header() {
           <label className="cursor-pointer">
             <input
               type="file"
-              accept="client/public/image/logo.png"
+              accept="image/*"
               className="hidden"
               onChange={handleLogoUpload}
             />
 
             <div className="w-10 h-10 rounded-lg overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-              {logo ? (
-                <img src={logo} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-white text-xs font-bold">LOGO</span>
-              )}
+              <img
+                src={logoSrc ?? "/image/logo.png"}
+                alt="Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
           </label>
 

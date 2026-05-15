@@ -8,10 +8,10 @@ export default function S20DemoSection() {
         {/* Cabeçalho */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Parte Prática: O <span className="text-primary">Samsung S20</span>
+            Parte Prática: O <span className="text-primary">Samsung S20FE 5g</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Um smartphone antigo sem tela ainda consegue entender movimento e espaço usando sensores internos
+            Um smartphone sem tela e ainda consegue entender movimento e espaço usando sensores internos.
           </p>
         </div>
 
@@ -23,28 +23,28 @@ export default function S20DemoSection() {
                 <Zap className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-2">Reutilização Tecnológica</h3>
-              <p className="text-muted-foreground text-sm">Um dispositivo descartado ganha nova vida como ferramenta educativa</p>
+              <p className="text-muted-foreground text-sm">Um dispositivo "descartado" ganha nova vida como ferramenta educativa.</p>
             </div>
             <div className="text-center">
               <div className="bg-secondary/10 rounded-lg p-6 mb-4 inline-block">
                 <Radio className="w-8 h-8 text-secondary" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-2">Sensores Ativos</h3>
-              <p className="text-muted-foreground text-sm">Mesmo sem tela, os sensores continuam funcionando e enviando dados</p>
+              <p className="text-muted-foreground text-sm">Mesmo sem tela, os sensores continuam funcionando e enviando dados.</p>
             </div>
             <div className="text-center">
               <div className="bg-accent/10 rounded-lg p-6 mb-4 inline-block">
                 <Activity className="w-8 h-8 text-accent" />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-2">Tempo Real</h3>
-              <p className="text-muted-foreground text-sm">Movimento detectado e processado instantaneamente</p>
+              <p className="text-muted-foreground text-sm">Movimentos são detectados e processados instantaneamente.</p>
             </div>
           </div>
         </div>
 
         {/* Fluxo de dados */}
         <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 border border-border/50 mb-16">
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center">Fluxo de Dados do S20</h3>
+          <h3 className="text-2xl font-bold text-foreground mb-8 text-center">Fluxo de Dados do S20FE 5g</h3>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <div className="flex-shrink-0 w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
@@ -52,7 +52,7 @@ export default function S20DemoSection() {
               </div>
               <div>
                 <p className="font-semibold text-foreground">Sensores Capturam Dados</p>
-                <p className="text-sm text-muted-foreground">Giroscópio, acelerômetro e magnetômetro coletam informações de movimento</p>
+                <p className="text-sm text-muted-foreground">Giroscópio, acelerômetro e magnetômetro coletam informações de movimento.</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -61,7 +61,7 @@ export default function S20DemoSection() {
               </div>
               <div>
                 <p className="font-semibold text-foreground">Processamento Local</p>
-                <p className="text-sm text-muted-foreground">Algoritmos calculam posição, orientação e velocidade em tempo real</p>
+                <p className="text-sm text-muted-foreground">Algoritmos calculam posição, orientação e velocidade em tempo real.</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ export default function S20DemoSection() {
               </div>
               <div>
                 <p className="font-semibold text-foreground">Transmissão de Dados</p>
-                <p className="text-sm text-muted-foreground">Informações são enviadas via Bluetooth ou WiFi para outro dispositivo</p>
+                <p className="text-sm text-muted-foreground">Informações são enviadas via Bluetooth ou WiFi para outro dispositivo.</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -79,7 +79,7 @@ export default function S20DemoSection() {
               </div>
               <div>
                 <p className="font-semibold text-foreground">Visualização</p>
-                <p className="text-sm text-muted-foreground">Dados são exibidos em tempo real em um monitor ou projetor</p>
+                <p className="text-sm text-muted-foreground">Dados são exibidos em tempo real em um monitor ou projetor.</p>
               </div>
             </div>
           </div>

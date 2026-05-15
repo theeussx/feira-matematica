@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -13,16 +14,20 @@ import Participants from "./pages/Participants";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-function Router() {
+interface RouterProps {
+  logoSrc: string | null;
+}
+
+function Router({ logoSrc }: RouterProps) {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/sensors"} component={Sensors} />
-      <Route path={"/math"} component={Math} />
-      <Route path={"/demo"} component={Demo} />
-      <Route path={"/quiz"} component={Quiz} />
-      <Route path={"/participants"} component={Participants} />
-      <Route path={"/404"} component={NotFound} />
+      <Route path="/">{() => <Home logoSrc={logoSrc} />}</Route>
+      <Route path="/sensors" component={Sensors} />
+      <Route path="/math" component={Math} />
+      <Route path="/demo" component={Demo} />
+      <Route path="/quiz" component={Quiz} />
+      <Route path="/participants" component={Participants} />
+      <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
@@ -30,6 +35,13 @@ function Router() {
 }
 
 function App() {
+  const [logoSrc, setLogoSrc] = useState<string | null>(null);
+
+  const handleLogoUpload = (file: File | null) => {
+    if (!file) return;
+    setLogoSrc(URL.createObjectURL(file));
+  };
+
   return (
     <ErrorBoundary>
       <ThemeProvider
@@ -38,8 +50,8 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Header />
-          <Router />
+          <Header logoSrc={logoSrc} onLogoUpload={handleLogoUpload} />
+          <Router logoSrc={logoSrc} />
           <Footer />
         </TooltipProvider>
       </ThemeProvider>
