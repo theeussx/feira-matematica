@@ -83,7 +83,7 @@ export default function SensorsSection() {
             </div>
             <div className="bg-background rounded-lg p-8 flex items-center justify-center min-h-64">
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663139149735/7aawHANkmKJCoetVjQXHah/sensors-3d-visualization-WgYDASkcfk6BknyS29P24x.webp"
+                src="image/sensor.png"
                 alt="Visualizacao 3D de sensores"
                 className="w-full h-auto"
               />

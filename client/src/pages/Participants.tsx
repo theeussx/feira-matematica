@@ -6,7 +6,7 @@ export default function Participants() {
     {
       id: 1,
       name: "Mateus Henrique",
-      role: "Desenvolvedor Frontend e Designer",
+      role: "Desenvolvedor do site",
       image: "/participants/participant-1.jpg",
     },
     {
@@ -44,6 +44,7 @@ export default function Participants() {
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Nossa <span className="text-primary">Equipe</span>
             </h1>
+
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Conheça os participantes da Feira de Matemática 2026
             </p>
@@ -57,7 +58,7 @@ export default function Participants() {
                 className="p-6 bg-card border border-border/50 hover:border-primary/50 transition-all hover:shadow-lg group overflow-hidden"
               >
                 {/* Espaço para foto */}
-                <div className="mb-4 w-full aspect-square bg-muted rounded-lg flex items-center justify-center border-2 border-dashed border-border group-hover:border-primary/50 transition-colors">
+                <div className="mb-4 w-full aspect-square bg-muted rounded-lg flex items-center justify-center border-2 border-dashed border-border group-hover:border-primary/50 overflow-hidden">
                   {participant.image ? (
                     <img
                       src={participant.image}
@@ -67,6 +68,7 @@ export default function Participants() {
                   ) : (
                     <div className="flex flex-col items-center justify-center gap-2">
                       <User className="w-12 h-12 text-muted-foreground" />
+
                       <p className="text-xs text-muted-foreground text-center">
                         Adicionar foto
                       </p>
@@ -79,6 +81,7 @@ export default function Participants() {
                   <h3 className="text-lg font-bold text-foreground mb-1">
                     {participant.name}
                   </h3>
+
                   <p className="text-sm text-primary font-semibold">
                     {participant.role}
                   </p>

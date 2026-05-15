@@ -60,7 +60,7 @@ export default function ARExplainedSection() {
         {/* Imagem ilustrativa */}
         <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 border border-border/50">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663139149735/7aawHANkmKJCoetVjQXHah/ar-vs-vr-illustration-Q6EAt3HbezqT5oB8xJgM4k.webp"
+            src="image/AR-VR.png"
             alt="Comparacao entre Realidade Aumentada e Virtual"
             className="w-full h-auto rounded-lg"
           />
