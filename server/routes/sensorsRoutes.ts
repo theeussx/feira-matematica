@@ -1,5 +1,4 @@
-import * as express from "express";
-import type { Request, Response } from "express";
+import express from "express";
 import { z } from "zod";
 import { getDb } from "../db";
 import { sensorData } from "../../drizzle/shema";
@@ -19,7 +18,7 @@ const SensorDataSchema = z.object({
 router.post(
   "/record",
   express.json(),
-  async (req: Request, res: Response) => {
+  async (req, res) => {
     try {
       const parsed = SensorDataSchema.parse(req.body);
       const db = await getDb();
@@ -43,7 +42,7 @@ router.post(
   }
 );
 
-router.get("/latest", async (req: Request, res: Response) => {
+router.get("/latest", async (req, res) => {
   const deviceId = String(req.query.deviceId || "");
   const db = await getDb();
   if (!db) return res.status(500).json(null);
