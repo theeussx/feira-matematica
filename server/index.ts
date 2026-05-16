@@ -1,6 +1,6 @@
-import express from "express";
+import express, { type Request, type Response } from "express";
 import { createServer } from "http";
-import path from "path";
+import * as path from "path";
 import { fileURLToPath } from "url";
 import sensorsRouter from "./routes/sensorsRoutes";
 
@@ -18,8 +18,8 @@ const staticPath =
     : path.resolve(__dirname, "..", "dist", "public");
 
 app.use(express.static(staticPath));
-app.get("/api/*", (_req, res) => res.status(404).end());
-app.get("*", (_req, res) => {
+app.get("/api/*", (_req: Request, res: Response) => res.status(404).end());
+app.get("*", (_req: Request, res: Response) => {
   res.sendFile(path.join(staticPath, "index.html"));
 });
 

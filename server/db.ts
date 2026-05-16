@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
+import { config as loadEnv } from "dotenv";
 import { createPool, Pool } from "mysql2/promise";
 import { drizzle } from "drizzle-orm/mysql2";
 
-dotenv.config();
+loadEnv();
 
 let dbInstance: any = null;
 
