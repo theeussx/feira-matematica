@@ -1,4 +1,4 @@
-import express, { type Request, type Response } from "express";
+import express from "express";
 import { createServer } from "http";
 import * as path from "path";
 import { fileURLToPath } from "url";
@@ -18,8 +18,8 @@ const staticPath =
     : path.resolve(__dirname, "..", "dist", "public");
 
 app.use(express.static(staticPath));
-app.get("/api/*", (_req: Request, res: Response) => res.status(404).end());
-app.get("*", (_req: Request, res: Response) => {
+app.get("/api/*", (_req: express.Request, res: express.Response) => res.status(404).end());
+app.get("*", (_req: express.Request, res: express.Response) => {
   res.sendFile(path.join(staticPath, "index.html"));
 });
 
