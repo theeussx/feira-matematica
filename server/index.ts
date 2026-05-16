@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
+import sensorsRouter from "./routes/sensorsRoutes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,6 +10,11 @@ const __dirname = path.dirname(__filename);
 async function startServer() {
   const app = express();
   const server = createServer(app);
+
+  app.use(express.json());
+
+  // API routes
+  app.use("/api/sensors", sensorsRouter);
 
   // Serve static files from dist/public in production
   const staticPath =
@@ -18,7 +24,8 @@ async function startServer() {
 
   app.use(express.static(staticPath));
 
-  // Handle client-side routing - serve index.html for all routes
+  // Handle client-side routing - serve index.html for all non-API routes
+  app.get("/api/*", (_req, res) => res.status(404).end());
   app.get("*", (_req, res) => {
     res.sendFile(path.join(staticPath, "index.html"));
   });

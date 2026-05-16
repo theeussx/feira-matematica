@@ -3,7 +3,7 @@ import { trpc } from "@/lib/trpc";
 import S20DemoSection from "@/components/S20DemoSection";
 import FutureSection from "@/components/FutureSection";
 
-export default function Demo() {
+export default function Demo( ) {
   const [latestData, setLatestData] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
   
@@ -31,5 +31,3 @@ export default function Demo() {
     </div>
   );
 }
-
-

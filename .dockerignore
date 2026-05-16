@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+pnpm-debug.log
+dist
+.git
+docker-compose.override.yml
+.env
+.DS_Store
+mysql-data

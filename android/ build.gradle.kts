@@ -12,6 +12,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        // URL do servidor (padrão) - edite conforme necessário
+        buildConfigField("String", "SERVER_URL", "\"https://seu-dominio.manus.space\"")
     }
     
     buildTypes {

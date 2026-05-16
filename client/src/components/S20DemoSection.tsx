@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Activity, Radio, Zap } from "lucide-react";
 
-export default function S20DemoSection() {
+export default function S20DemoSection({ latestData, isConnected }: { latestData?: any; isConnected?: boolean }) {
   return (
     <section className="w-full py-20 bg-muted/50">
       <div className="container mx-auto px-4">
@@ -105,7 +105,7 @@ export default function S20DemoSection() {
               <div className="bg-background rounded-lg p-4 border border-border">
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-sm font-semibold text-foreground">Movimento X</p>
-                  <p className="text-primary font-mono">+0.45 m/s</p>
+                  <p className="text-primary font-mono">{latestData?.accelerationX?.toFixed?.(2) ?? "+0.45 m/s"}</p>
                 </div>
                 <div className="w-full bg-border rounded-full h-2">
                   <div className="bg-primary h-2 rounded-full" style={{ width: "45%" }} />
@@ -114,7 +114,7 @@ export default function S20DemoSection() {
               <div className="bg-background rounded-lg p-4 border border-border">
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-sm font-semibold text-foreground">Movimento Y</p>
-                  <p className="text-secondary font-mono">-0.32 m/s</p>
+                  <p className="text-secondary font-mono">{latestData?.accelerationY?.toFixed?.(2) ?? "-0.32 m/s"}</p>
                 </div>
                 <div className="w-full bg-border rounded-full h-2">
                   <div className="bg-secondary h-2 rounded-full" style={{ width: "32%" }} />
@@ -123,7 +123,7 @@ export default function S20DemoSection() {
               <div className="bg-background rounded-lg p-4 border border-border">
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-sm font-semibold text-foreground">Movimento Z</p>
-                  <p className="text-accent font-mono">+0.18 m/s</p>
+                  <p className="text-accent font-mono">{latestData?.accelerationZ?.toFixed?.(2) ?? "+0.18 m/s"}</p>
                 </div>
                 <div className="w-full bg-border rounded-full h-2">
                   <div className="bg-accent h-2 rounded-full" style={{ width: "18%" }} />
@@ -134,7 +134,7 @@ export default function S20DemoSection() {
                   <p className="text-sm font-semibold text-foreground">Status de Conexão</p>
                   <span className="inline-flex items-center gap-2">
                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    <p className="text-xs text-green-600">Conectado</p>
+                    <p className="text-xs" style={{ color: isConnected ? undefined : '#888' }}>{isConnected ? 'Conectado' : 'Desconectado'}</p>
                   </span>
                 </div>
               </div>

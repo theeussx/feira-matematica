@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity( ), SensorEventListener {
     private val client = OkHttpClient()
     private val gson = Gson()
     
-    // ⚠️ ALTERE PARA O URL DO SEU SERVIDOR
-    private val SERVER_URL = "https://seu-dominio.manus.space/api/trpc/sensors.recordData"
+    // Usa SERVER_URL definido em BuildConfig (defina no build.gradle)
+    private val SERVER_URL = BuildConfig.SERVER_URL + "/api/sensors/record"
     private val DEVICE_ID = "S20FE-${android.os.Build.SERIAL}"
     
     override fun onCreate(savedInstanceState: Bundle? ) {
