@@ -418,11 +418,11 @@ Desenvolvido com ❤️ pela equipe da Feira de Matemática 2026.
 
 **Participantes:**
 - [Mateus Henrique](https://theeussx.vercel.app) - Desenvolvedor Full Stack - Designer - suporte - apresentador 1
-- [Arthur Felipe] desenvolvedor do aplicativo - apresentador 2
-- [Matheus Gabriel] - Pesquisador - apresentador 4
-- [Rivaldo] - Coordenador
-- [Luiz Henrique] apresentador 3
-- [Alisson Felipe] apresentador 5
+- Arthur Felipe - Desenvolvedor do aplicativo - Apresentador 2
+- Matheus Gabriel - Pesquisador - Apresentador 4
+- Rivaldo - Orientador
+- Luiz Henrique Apresentador 3
+- Alisson Felipe Apresentador 5
 
 ---
 
