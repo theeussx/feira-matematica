@@ -7,7 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=for-the-badge&logo=typescript)
 ![Express](https://img.shields.io/badge/Express-4.21-000000?style=for-the-badge&logo=express)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Open Source](https://shields.io/badge/OpenSoucre-Enabled-2496ED?style=for-the-badge&logo=opensource)
 
 **Como celulares conseguem entender o espaço usando matemática?**
 
@@ -417,11 +417,12 @@ Contribuições são bem-vindas! Siga os passos abaixo:
 Desenvolvido com ❤️ pela equipe da Feira de Matemática 2026.
 
 **Participantes:**
-- [Mateus Henrique] - Desenvolvedor Full Stack
-- [Nome 2] - Designer
-- [Nome 3] - Pesquisador
-- [Nome 4] - Coordenador
-- [Nome 5] - Suporte
+- [Mateus Henrique](https://theeussx.vercel.app) - Desenvolvedor Full Stack - Designer - suporte - apresentador 1
+- [Arthur Felipe] desenvolvedor do aplicativo - apresentador 2
+- [Matheus Gabriel] - Pesquisador - apresentador 4
+- [Rivaldo] - Coordenador
+- [Luiz Henrique] apresentador 3
+- [Alisson Felipe] apresentador 5
 
 ---
 
@@ -441,12 +442,6 @@ pnpm dev
 
 ## 📚 Documentação
 
-- [Guia de Instalação](./docs/INSTALACAO.md)
-- [API Reference](./docs/API.md)
-- [Arquitetura do Projeto](./docs/ARQUITETURA.md)
-- [Troubleshooting](./docs/TROUBLESHOOTING.md)
-
----
 
 ## 🐛 Reportar Bugs
 
@@ -469,23 +464,11 @@ Tem uma ideia? Abra uma [Discussion](https://github.com/theeussx/feira-matematic
 ## 📞 Suporte
 
 Para dúvidas ou suporte:
-
-1. Verifique a [Documentação](./docs)
-2. Procure por [Issues similares](https://github.com/theeussx/feira-matematica/issues)
-3. Abra uma nova [Discussion](https://github.com/theeussx/feira-matematica/discussions)
+1. Procure por [Issues similares](https://github.com/theeussx/feira-matematica/issues)
+2. Abra uma nova [Discussion](https://github.com/theeussx/feira-matematica/discussions)
 
 ---
 
-## 🎉 Agradecimentos
-
-- **React** - Framework UI
-- **Tailwind CSS** - Styling
-- **Radix UI** - Components
-- **Express.js** - Backend
-- **Render** - Hosting
-- **GitHub** - Version control
-
----
 
 <div align="center">
 
@@ -493,6 +476,6 @@ Para dúvidas ou suporte:
 
 ⭐ Se este projeto foi útil, considere dar uma estrela! ⭐
 
-[⬆ Voltar ao Topo](#-feira-de-matemática-realidade-aumentada-e-sensores)
+[⬆ Voltar ao Topo](#-feira-de-matemática-realidade-aumentada)
 
 </div>
