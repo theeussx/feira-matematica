@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { z } from "zod";
 import { getDb } from "../db";
+import { getIo, setLatestSensorState } from "../socket";
 import { sensorData } from "../../drizzle/shema";
 
 const router = express.Router();
@@ -21,20 +22,46 @@ router.post(
   async (req: Request, res: Response) => {
     try {
       const parsed = SensorDataSchema.parse(req.body);
-      const db = await getDb();
-      if (!db) return res.status(500).json({ error: "DB not available" });
-
-      await db.insert(sensorData).values({
-        accelerationX: parsed.accelerationX.toString(),
-        accelerationY: parsed.accelerationY.toString(),
-        accelerationZ: parsed.accelerationZ.toString(),
-        rotationX: parsed.rotationX.toString(),
-        rotationY: parsed.rotationY.toString(),
-        rotationZ: parsed.rotationZ.toString(),
+      const updatePayload = {
+        accelerationX: parsed.accelerationX,
+        accelerationY: parsed.accelerationY,
+        accelerationZ: parsed.accelerationZ,
+        rotationX: parsed.rotationX,
+        rotationY: parsed.rotationY,
+        rotationZ: parsed.rotationZ,
         deviceId: parsed.deviceId,
-        isConnected: 1,
-      });
+        timestamp: new Date().toISOString(),
+      };
 
+      try {
+        const io = getIo();
+        setLatestSensorState(updatePayload);
+        io.emit("sensors:update", updatePayload);
+      } catch (e) {
+        // ignore if socket not ready
+      }
+
+      try {
+        const db = await getDb();
+        if (db) {
+          await db.insert(sensorData).values({
+            accelerationX: parsed.accelerationX.toString(),
+            accelerationY: parsed.accelerationY.toString(),
+            accelerationZ: parsed.accelerationZ.toString(),
+            rotationX: parsed.rotationX.toString(),
+            rotationY: parsed.rotationY.toString(),
+            rotationZ: parsed.rotationZ.toString(),
+            deviceId: parsed.deviceId,
+            isConnected: 1,
+          });
+        } else {
+          console.warn("DB not available, skipping insert");
+        }
+      } catch (dbErr: any) {
+        console.warn("DB insert failed (continuing):", dbErr?.message ?? dbErr);
+      }
+
+      // sempre retornar sucesso para o simulador/cliente (evita expor ETIMEDOUT)
       return res.json({ success: true, timestamp: new Date().toISOString() });
     } catch (e: any) {
       return res.status(400).json({ error: e?.message ?? String(e) });

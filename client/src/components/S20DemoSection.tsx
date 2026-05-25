@@ -133,7 +133,7 @@ export default function S20DemoSection({ latestData, isConnected }: { latestData
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold text-foreground">Status de Conexão</p>
                   <span className="inline-flex items-center gap-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`} />
                     <p className="text-xs" style={{ color: isConnected ? undefined : '#888' }}>{isConnected ? 'Conectado' : 'Desconectado'}</p>
                   </span>
                 </div>

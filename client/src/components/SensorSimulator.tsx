@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -59,6 +60,24 @@ export default function SensorSimulator({
   // Notificar mudanças
   useEffect(() => {
     onDataChange?.(data);
+    // Se estiver gravando, enviar para o servidor
+    if (isRecording) {
+      (async () => {
+        try {
+          await axios.post("/api/sensors/record", {
+            accelerationX: data.accelerationX,
+            accelerationY: data.accelerationY,
+            accelerationZ: data.accelerationZ,
+            rotationX: data.rotationX,
+            rotationY: data.rotationY,
+            rotationZ: data.rotationZ,
+            deviceId: "S20FE-1",
+          });
+        } catch (e) {
+          // não interromper a simulação se o envio falhar
+        }
+      })();
+    }
   }, [data, onDataChange]);
 
   const handleSliderChange = (axis: keyof SensorData, value: number[]) => {
