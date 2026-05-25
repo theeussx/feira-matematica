@@ -1,4 +1,4 @@
-# 🎓 Feira de Matemática: Realidade Aumentada e Sensores
+# 🎓 Feira de Matemática: Realidade Aumentada
 
 <div align="center">
 
@@ -9,11 +9,11 @@
 ![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Como celulares conseguem entender o espaço usando matemática e sensores?**
+**Como celulares conseguem entender o espaço usando matemática?**
 
 Um projeto educativo interativo que demonstra como a Realidade Aumentada funciona através de sensores, matemática e cálculos espaciais em tempo real.
 
-[🌐 Acesse o Site](#-como-acessar) • [📚 Documentação](#-documentação) • [🚀 Começar](#-começar) • [🤝 Contribuir](#-contribuir)
+[🌐 Acesse o Site](http://feira-matematica.onrender.com) • [🚀 Começar](#-começar) • [🤝 Contribuir](#-contribuir)
 
 </div>
 
@@ -412,18 +412,12 @@ Contribuições são bem-vindas! Siga os passos abaixo:
 
 ---
 
-## 📝 Licença
-
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
 ## 👥 Autores
 
 Desenvolvido com ❤️ pela equipe da Feira de Matemática 2026.
 
 **Participantes:**
-- [Seu Nome] - Desenvolvedor Full Stack
+- [Mateus Henrique] - Desenvolvedor Full Stack
 - [Nome 2] - Designer
 - [Nome 3] - Pesquisador
 - [Nome 4] - Coordenador
