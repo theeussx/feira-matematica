@@ -1,4 +1,5 @@
 # 🎓 Feira de Matemática: Realidade Aumentada
+![logo](client/public/image/logo.png)
 
 <div align="center">
 
