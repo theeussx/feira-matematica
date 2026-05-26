@@ -6,32 +6,38 @@ export default function Participants() {
     {
       id: 1,
       name: "Mateus Henrique",
-      role: "Desenvolvedor do site",
-      image: "/image/participants/mateus.jpg",
+      role: "Desenvolvedor full stack",
+      image: "/image/participants/mateus.png",
     },
     {
       id: 2,
-      name: "Participante 2",
-      role: "Função",
-      image: null,
+      name: "Arthur Felipe",
+      role: "Desenvolvedor do aplicativo",
+      image: "/image/participants/arthur.png",
     },
     {
       id: 3,
-      name: "Participante 3",
-      role: "Função",
-      image: null,
+      name: "Alisson Felipe",
+      role: "Participante",
+      image: "/image/participants/alisson.png",
     },
     {
       id: 4,
-      name: "Participante 4",
-      role: "Função",
-      image: null,
+      name: "Matheus Gabriel",
+      role: "Participante",
+      image: "/image/participants/matheus.png",
     },
     {
       id: 5,
-      name: "Participante 5",
-      role: "Função",
-      image: null,
+      name: "Luiz Henrique",
+      role: "Participante",
+      image: "/image/participants/luiz.png",
+    },
+    {
+      id: 6,
+      name: "Rivaldo Lopes",
+      role: "Professor orientador",
+      image: "/image/participants/rivaldo.png",
     },
   ];
 
@@ -46,7 +52,8 @@ export default function Participants() {
             </h1>
 
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Conheça os participantes da Feira de Matemática 2026
+              Conheça os participantes da Feira de Matemática 2026.
+              abaixo esta as fotos dos participantes de forma fictícia. elas representa como cada um se imagina fazendo parte do trabalho.
             </p>
           </div>
 
@@ -55,7 +62,7 @@ export default function Participants() {
             {participants.map((participant) => (
               <Card
                 key={participant.id}
-                className="p-6 bg-card border border-border/50 hover:border-primary/50 transition-all hover:shadow-lg group overflow-hidden"
+                className={`p-6 bg-card border border-border/50 hover:border-primary/50 transition-all hover:shadow-lg group overflow-hidden ${participant.id === 6 ? "lg:col-start-3 lg:row-start-2" : ""}`}
               >
                 {/* Espaço para foto */}
                 <div className="mb-4 w-full aspect-square bg-muted rounded-lg flex items-center justify-center border-2 border-dashed border-border group-hover:border-primary/50 overflow-hidden">
@@ -85,6 +92,17 @@ export default function Participants() {
                   <p className="text-sm text-primary font-semibold">
                     {participant.role}
                   </p>
+
+                  {participant.id === 1 ? (
+                    <a
+                      href="https://theeussx.vercel.app/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary/90"
+                    >
+                      Ver portfólio
+                    </a>
+                  ) : null}
                 </div>
               </Card>
             ))}
