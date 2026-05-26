@@ -6,11 +6,24 @@ import FutureSection from "@/components/FutureSection";
 export default function Demo( ) {
   const [latestData, setLatestData] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
+
   // Conexão WebSocket para receber atualizações em tempo real
   useEffect(() => {
-    // Em desenvolvimento o servidor socket fica em :3000. Podemos sobrepor com VITE_SOCKET_URL.
-    const serverUrl = (import.meta.env as any).VITE_SOCKET_URL || `${window.location.protocol}//${window.location.hostname}:3000`;
-    const socket: Socket = io(serverUrl, { transports: ["websocket", "polling"] });
+    // Em produção no Render, o socket deve usar a mesma URL do site (sem porta 3000)
+    // Em desenvolvimento local, o Vite costuma rodar na 5173 e o server na 3000
+    const isProd = import.meta.env.PROD;
+    const defaultUrl = isProd 
+      ? `${window.location.protocol}//${window.location.host}`
+      : `${window.location.protocol}//${window.location.hostname}:3000`;
+
+    const serverUrl = (import.meta.env as any).VITE_SOCKET_URL || defaultUrl;
+    
+    console.log("Connecting to socket at:", serverUrl);
+    
+    const socket: Socket = io(serverUrl, { 
+      transports: ["websocket", "polling"],
+      reconnectionAttempts: 5
+    });
 
     socket.on("connect", () => {
       console.log("socket connected", socket.id);
