@@ -58,8 +58,6 @@ import java.net.URL
 import java.util.Locale
 
 // URL do servidor para envio de dados de sensores
-// Em produção: https://feira-matematica.onrender.com/api/sensors/record
-// Em desenvolvimento local: altere para http://10.0.2.2:3000/api/sensors/record (emulador)
 private const val API_URL_ATUAL = "https://feira-matematica.onrender.com/api/sensors/record"
 
 class MainActivity : ComponentActivity() {
@@ -150,12 +148,10 @@ fun SensorAnalyzerApp(
     LaunchedEffect(Unit) {
         while (true) {
             val battery = readBatteryInfo(context)
-
             batteryLevel.value = battery.level
             batteryTemp.value = battery.temperature
             batteryStatus.value = battery.status
-
-            delay(1000)
+            delay(5000) // Bateria não precisa atualizar tão rápido
         }
     }
 
@@ -179,7 +175,8 @@ fun SensorAnalyzerApp(
                 apiStatus.value = "Envio pausado"
             }
 
-            delay(1000)
+            // OTIMIZAÇÃO: Reduzido de 1000ms para 100ms para atualização fluida
+            delay(100)
         }
     }
 
@@ -433,7 +430,6 @@ fun ApiStatusCard(
             ) {
                 Text(
                     text = "Envio para API",
-                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF020617)
                 )
@@ -446,14 +442,15 @@ fun ApiStatusCard(
 
             Text(
                 text = status,
+                style = MaterialTheme.typography.bodySmall,
                 color = if (status.contains("sucesso")) Color(0xFF16A34A) else Color(0xFFDC2626),
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.Bold
             )
 
             Text(
                 text = url,
-                style = MaterialTheme.typography.bodySmall,
-                color = Color(0xFF475569)
+                style = MaterialTheme.typography.labelSmall,
+                color = Color(0xFF64748B)
             )
         }
     }
@@ -463,7 +460,7 @@ fun ApiStatusCard(
 fun InfoCard(
     title: String,
     color: Color,
-    content: @Composable () -> Unit
+    content: @Composable ColumnScope.() -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -477,28 +474,29 @@ fun InfoCard(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(44.dp)
-                    .background(
-                        color = color,
-                        shape = RoundedCornerShape(14.dp)
-                    )
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF020617)
-            )
-
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .height(16.dp)
+                        .fillMaxWidth(0.02f)
+                        .background(color, RoundedCornerShape(4.dp))
+                )
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = color
+                )
+            }
             content()
         }
     }
+}
+
+interface ColumnScope {
+    @Composable
+    fun InfoLine(label: String, value: String)
 }
 
 @Composable
@@ -548,7 +546,6 @@ fun SensorCard(
         } else {
             values.forEachIndexed { index, value ->
                 val label = labels.getOrNull(index) ?: "Valor ${index + 1}"
-
                 InfoLine(
                     label = label,
                     value = String.format(Locale.US, "%.4f", value)
@@ -601,74 +598,8 @@ fun readBatteryInfo(context: Context): BatteryInfo {
     )
 }
 
-fun buildSensorPayload(
-    sensorValues: Map<Int, List<Float>>,
-    batteryLevel: Int,
-    batteryTemp: Double,
-    batteryStatus: String
-): JSONObject {
-    val json = JSONObject()
-
-    val device = JSONObject()
-    device.put("manufacturer", Build.MANUFACTURER)
-    device.put("model", Build.MODEL)
-    device.put("android", Build.VERSION.RELEASE)
-    device.put("sdk", Build.VERSION.SDK_INT)
-
-    val battery = JSONObject()
-    battery.put("level", batteryLevel)
-    battery.put("temperature", batteryTemp)
-    battery.put("status", batteryStatus)
-
-    json.put("device", device)
-    json.put("battery", battery)
-
-    json.put("accelerometer", vectorJson(sensorValues[Sensor.TYPE_ACCELEROMETER]))
-    json.put("gyroscope", vectorJson(sensorValues[Sensor.TYPE_GYROSCOPE]))
-    json.put("magnetometer", vectorJson(sensorValues[Sensor.TYPE_MAGNETIC_FIELD]))
-    json.put("gravity", vectorJson(sensorValues[Sensor.TYPE_GRAVITY]))
-    json.put("linearAcceleration", vectorJson(sensorValues[Sensor.TYPE_LINEAR_ACCELERATION]))
-    json.put("rotation", vectorJson(sensorValues[Sensor.TYPE_ROTATION_VECTOR]))
-
-    val light = JSONObject()
-    light.put("lux", sensorValues[Sensor.TYPE_LIGHT]?.getOrNull(0))
-    json.put("light", light)
-
-    val proximity = JSONObject()
-    proximity.put("distance", sensorValues[Sensor.TYPE_PROXIMITY]?.getOrNull(0))
-    json.put("proximity", proximity)
-
-    val pressure = JSONObject()
-    pressure.put("hpa", sensorValues[Sensor.TYPE_PRESSURE]?.getOrNull(0))
-    json.put("pressure", pressure)
-
-    val ambientTemp = JSONObject()
-    ambientTemp.put("temperature", sensorValues[Sensor.TYPE_AMBIENT_TEMPERATURE]?.getOrNull(0))
-    json.put("ambientTemperature", ambientTemp)
-
-    json.put("timestamp", System.currentTimeMillis())
-
-    return json
-}
-
-fun vectorJson(values: List<Float>?): JSONObject {
-    val json = JSONObject()
-
-    json.put("x", values?.getOrNull(0))
-    json.put("y", values?.getOrNull(1))
-    json.put("z", values?.getOrNull(2))
-
-    if (values != null && values.size > 3) {
-        json.put("w", values.getOrNull(3))
-    }
-
-    return json
-}
-
-// Monta o JSON simples exigido pelo servidor: acceleration{X,Y,Z}, rotation{X,Y,Z}, deviceId
 fun buildServerPayload(sensorValues: Map<Int, List<Float>>): JSONObject {
     val json = JSONObject()
-
     val accel = sensorValues[Sensor.TYPE_ACCELEROMETER]
     json.put("accelerationX", accel?.getOrNull(0)?.toDouble() ?: 0.0)
     json.put("accelerationY", accel?.getOrNull(1)?.toDouble() ?: 0.0)
@@ -679,14 +610,8 @@ fun buildServerPayload(sensorValues: Map<Int, List<Float>>): JSONObject {
     json.put("rotationY", rot?.getOrNull(1)?.toDouble() ?: 0.0)
     json.put("rotationZ", rot?.getOrNull(2)?.toDouble() ?: 0.0)
 
-    val deviceId = try {
-        "S20FE-${Build.MODEL}-${Build.ID}"
-    } catch (e: Exception) {
-        "S20FE-unknown"
-    }
-
+    val deviceId = "S20FE-${Build.MODEL}-${Build.ID}"
     json.put("deviceId", deviceId)
-
     return json
 }
 
@@ -695,12 +620,11 @@ suspend fun sendJsonToApi(apiUrl: String, json: JSONObject): ApiResult {
         try {
             val url = URL(apiUrl)
             val connection = url.openConnection() as HttpURLConnection
-
             connection.requestMethod = "POST"
             connection.setRequestProperty("Content-Type", "application/json; charset=utf-8")
             connection.setRequestProperty("Accept", "application/json")
-            connection.connectTimeout = 5000
-            connection.readTimeout = 5000
+            connection.connectTimeout = 2000 // Timeout menor para falhar rápido e tentar de novo
+            connection.readTimeout = 2000
             connection.doOutput = true
 
             OutputStreamWriter(connection.outputStream, Charsets.UTF_8).use { writer ->
@@ -710,14 +634,9 @@ suspend fun sendJsonToApi(apiUrl: String, json: JSONObject): ApiResult {
 
             val responseCode = connection.responseCode
             connection.disconnect()
-
-            if (responseCode in 200..299) {
-                ApiResult(true, "HTTP $responseCode")
-            } else {
-                ApiResult(false, "HTTP $responseCode")
-            }
+            ApiResult(responseCode in 200..299, "HTTP $responseCode")
         } catch (e: Exception) {
-            ApiResult(false, e.message ?: "Erro desconhecido")
+            ApiResult(false, e.message ?: "Erro")
         }
     }
 }

@@ -7,12 +7,12 @@ import { sensorData } from "../../drizzle/shema";
 const router = express.Router();
 
 const SensorDataSchema = z.object({
-  accelerationX: z.number().min(-50).max(50),
-  accelerationY: z.number().min(-50).max(50),
-  accelerationZ: z.number().min(-50).max(50),
-  rotationX: z.number().min(-360).max(360),
-  rotationY: z.number().min(-360).max(360),
-  rotationZ: z.number().min(-360).max(360),
+  accelerationX: z.number(),
+  accelerationY: z.number(),
+  accelerationZ: z.number(),
+  rotationX: z.number(),
+  rotationY: z.number(),
+  rotationZ: z.number(),
   deviceId: z.string().min(1).max(128),
 });
 
@@ -20,35 +20,28 @@ router.post(
   "/record",
   express.json(),
   async (req: Request, res: Response) => {
-    console.log(
-      `[sensor record] ${req.ip} ${req.method} ${req.originalUrl} device=${
-        req.body?.deviceId ?? "unknown"
-      }`
-    );
-
     try {
       const parsed = SensorDataSchema.parse(req.body);
       const updatePayload = {
-        accelerationX: parsed.accelerationX,
-        accelerationY: parsed.accelerationY,
-        accelerationZ: parsed.accelerationZ,
-        rotationX: parsed.rotationX,
-        rotationY: parsed.rotationY,
-        rotationZ: parsed.rotationZ,
-        deviceId: parsed.deviceId,
+        ...parsed,
         timestamp: new Date().toISOString(),
       };
 
+      // 1. Emitir para o Socket IMEDIATAMENTE (Prioridade Máxima)
       try {
         const io = getIo();
         setLatestSensorState(updatePayload);
         io.emit("sensors:update", updatePayload);
       } catch (e) {
-        // ignore if socket not ready
+        // ignore se socket não estiver pronto
       }
 
-      try {
-        const db = await getDb();
+      // 2. Responder ao App IMEDIATAMENTE (Libera o celular para o próximo envio)
+      res.json({ success: true });
+
+      // 3. Gravar no Banco em SEGUNDO PLANO (Não bloqueia a resposta)
+      // Não usamos 'await' aqui propositalmente para não atrasar o fluxo
+      getDb().then(async (db) => {
         if (db) {
           await db.insert(sensorData).values({
             accelerationX: parsed.accelerationX.toString(),
@@ -60,15 +53,11 @@ router.post(
             deviceId: parsed.deviceId,
             isConnected: 1,
           });
-        } else {
-          console.warn("DB not available, skipping insert");
         }
-      } catch (dbErr: any) {
-        console.warn("DB insert failed (continuing):", dbErr?.message ?? dbErr);
-      }
+      }).catch(err => {
+        console.warn("DB background insert failed:", err?.message);
+      });
 
-      // sempre retornar sucesso para o simulador/cliente (evita expor ETIMEDOUT)
-      return res.json({ success: true, timestamp: new Date().toISOString() });
     } catch (e: any) {
       return res.status(400).json({ error: e?.message ?? String(e) });
     }
