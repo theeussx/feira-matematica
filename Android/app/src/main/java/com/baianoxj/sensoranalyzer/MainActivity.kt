@@ -57,9 +57,6 @@ import java.util.Locale
 
 private const val API_URL_ATUAL = "http://192.168.1.105:4000/api/sensors"
 
-// Quando for testar no S20 real, troque pelo IP do seu PC:
-// Exemplo: private const val API_URL_CELULAR = "http://192.168.1.107:4000/api/sensors"
-
 class MainActivity : ComponentActivity() {
 
     private lateinit var sensorManager: SensorManager
