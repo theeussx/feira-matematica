@@ -36,6 +36,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,9 +57,10 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Locale
 
-// Para emulador Android use 10.0.2.2 para alcançar o host em dev; em release usamos HTTPS
-private val API_URL_ATUAL: String
-    get() = if (BuildConfig.DEBUG) "http://10.0.2.2:3000/api/sensors/record" else "https://feira-matematica.onrender.com/api/sensors/record"
+// URL do servidor para envio de dados de sensores
+// Em produção: https://feira-matematica.onrender.com/api/sensors/record
+// Em desenvolvimento local: altere para http://10.0.2.2:3000/api/sensors/record (emulador)
+private const val API_URL_ATUAL = "https://feira-matematica.onrender.com/api/sensors/record"
 
 class MainActivity : ComponentActivity() {
 
@@ -197,8 +200,17 @@ fun SensorAnalyzerApp(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+            verticalArrangement = Arrangement.spacedBy(14.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Feira de Matemática Logo",
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+                    .padding(bottom = 16.dp)
+            )
+
             Text(
                 text = "Sensor Analyzer",
                 style = MaterialTheme.typography.headlineMedium,
