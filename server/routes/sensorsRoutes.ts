@@ -20,6 +20,12 @@ router.post(
   "/record",
   express.json(),
   async (req: Request, res: Response) => {
+    console.log(
+      `[sensor record] ${req.ip} ${req.method} ${req.originalUrl} device=${
+        req.body?.deviceId ?? "unknown"
+      }`
+    );
+
     try {
       const parsed = SensorDataSchema.parse(req.body);
       const updatePayload = {
