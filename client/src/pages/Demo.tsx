@@ -8,8 +8,9 @@ export default function Demo( ) {
   const [isConnected, setIsConnected] = useState(false);
   // Conexão WebSocket para receber atualizações em tempo real
   useEffect(() => {
-    const serverUrl = `${window.location.protocol}//${window.location.hostname}:3000`;
-    const socket: Socket = io(serverUrl);
+    // Em desenvolvimento o servidor socket fica em :3000. Podemos sobrepor com VITE_SOCKET_URL.
+    const serverUrl = (import.meta.env as any).VITE_SOCKET_URL || `${window.location.protocol}//${window.location.hostname}:3000`;
+    const socket: Socket = io(serverUrl, { transports: ["websocket", "polling"] });
 
     socket.on("connect", () => {
       console.log("socket connected", socket.id);

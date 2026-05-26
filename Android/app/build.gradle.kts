@@ -5,16 +5,12 @@ plugins {
 
 android {
     namespace = "com.baianoxj.sensoranalyzer"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.baianoxj.sensoranalyzer"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

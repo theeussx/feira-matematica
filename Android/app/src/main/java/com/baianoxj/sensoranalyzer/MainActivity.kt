@@ -55,7 +55,9 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Locale
 
-private const val API_URL_ATUAL = "http://192.168.1.105:4000/api/sensors"
+// Para emulador Android use 10.0.2.2 para alcançar o host em dev; em release usamos HTTPS
+private val API_URL_ATUAL: String
+    get() = if (BuildConfig.DEBUG) "http://10.0.2.2:3000/api/sensors/record" else "https://feira-matematica.onrender.com/api/sensors/record"
 
 class MainActivity : ComponentActivity() {
 
@@ -157,11 +159,8 @@ fun SensorAnalyzerApp(
     LaunchedEffect(apiEnabled.value) {
         while (true) {
             if (apiEnabled.value) {
-                val payload = buildSensorPayload(
-                    sensorValues = sensorValues,
-                    batteryLevel = batteryLevel.value,
-                    batteryTemp = batteryTemp.value,
-                    batteryStatus = batteryStatus.value
+                val payload = buildServerPayload(
+                    sensorValues = sensorValues
                 )
 
                 val result = sendJsonToApi(API_URL_ATUAL, payload)
@@ -650,6 +649,31 @@ fun vectorJson(values: List<Float>?): JSONObject {
     if (values != null && values.size > 3) {
         json.put("w", values.getOrNull(3))
     }
+
+    return json
+}
+
+// Monta o JSON simples exigido pelo servidor: acceleration{X,Y,Z}, rotation{X,Y,Z}, deviceId
+fun buildServerPayload(sensorValues: Map<Int, List<Float>>): JSONObject {
+    val json = JSONObject()
+
+    val accel = sensorValues[Sensor.TYPE_ACCELEROMETER]
+    json.put("accelerationX", accel?.getOrNull(0)?.toDouble() ?: 0.0)
+    json.put("accelerationY", accel?.getOrNull(1)?.toDouble() ?: 0.0)
+    json.put("accelerationZ", accel?.getOrNull(2)?.toDouble() ?: 0.0)
+
+    val rot = sensorValues[Sensor.TYPE_ROTATION_VECTOR]
+    json.put("rotationX", rot?.getOrNull(0)?.toDouble() ?: 0.0)
+    json.put("rotationY", rot?.getOrNull(1)?.toDouble() ?: 0.0)
+    json.put("rotationZ", rot?.getOrNull(2)?.toDouble() ?: 0.0)
+
+    val deviceId = try {
+        "S20FE-${Build.MODEL}-${Build.ID}"
+    } catch (e: Exception) {
+        "S20FE-unknown"
+    }
+
+    json.put("deviceId", deviceId)
 
     return json
 }

@@ -5,9 +5,11 @@ let io: IOServer | null = null;
 let latestSensorState: any = null;
 
 export function initSocket(server: ReturnType<typeof createServer>) {
+  const socketOrigin = process.env.SOCKET_ORIGIN ? process.env.SOCKET_ORIGIN.split(",") : true;
+
   io = new IOServer(server, {
     cors: {
-      origin: true,
+      origin: socketOrigin,
       methods: ["GET", "POST"],
     },
   });
@@ -18,6 +20,17 @@ export function initSocket(server: ReturnType<typeof createServer>) {
     socket.on("sensors:subscribe", ({ deviceId }: { deviceId?: string }) => {
       if (latestSensorState) {
         socket.emit("sensors:update", latestSensorState);
+      }
+    });
+
+    // permitir que clientes (ex.: app Android em dev) publiquem dados via socket
+    socket.on("sensors:publish", (data: any) => {
+      try {
+        // atualizar último estado e retransmitir para todos os clientes
+        latestSensorState = data;
+        if (io) io.emit("sensors:update", data);
+      } catch (e) {
+        console.warn("Erro ao processar sensors:publish", e);
       }
     });
 
