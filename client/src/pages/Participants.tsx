@@ -39,6 +39,12 @@ export default function Participants() {
       role: "Professor orientador",
       image: "/image/participants/rivaldo.png",
     },
+    {
+      id: 6,
+      name: "Jailson Ribeiro",
+      role: "Participante",
+      image: "/image/participants/jailson.png",
+    },
   ];
 
   return (
