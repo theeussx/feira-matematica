@@ -1,5 +1,6 @@
 import { Server as IOServer } from "socket.io";
 import { createServer } from "http";
+import { initCamera } from "./camera";
 
 let io: IOServer | null = null;
 let latestSensorState: any = null;
@@ -38,6 +39,9 @@ export function initSocket(server: ReturnType<typeof createServer>) {
       console.log("Socket disconnected:", socket.id);
     });
   });
+
+  // Inicializar gerenciador de câmera
+  initCamera(io);
 
   return io;
 }
