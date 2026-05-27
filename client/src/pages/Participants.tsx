@@ -40,7 +40,7 @@ export default function Participants() {
       image: "/image/participants/rivaldo.png",
     },
     {
-      id: 6,
+      id: 7,
       name: "Jailson Ribeiro",
       role: "Participante",
       image: "/image/participants/jailson.png",
