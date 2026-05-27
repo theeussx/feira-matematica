@@ -14,6 +14,7 @@ import Quiz from "./pages/Quiz";
 import Participants from "./pages/Participants";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import CameraTransmit from "./pages/CameraTransmit";
 
 interface RouterProps {
   logoSrc: string | null;
@@ -31,6 +32,7 @@ function Router({ logoSrc }: RouterProps) {
       <Route path="/future" component={Future} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
+      <Route path="/camera-transmit" component={CameraTransmit} />
     </Switch>
   );
 }
