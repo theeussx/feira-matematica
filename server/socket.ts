@@ -1,11 +1,11 @@
 import { Server as IOServer } from "socket.io";
 import { createServer } from "http";
-import { initCamera } from "./camera";
+import { initCamera } from "./camera"; // Importação da câmera
 
 let io: IOServer | null = null;
 let latestSensorState: any = null;
 
-export function initSocket(server: ReturnType<typeof createServer>) {
+export function initSocket(server: ReturnType<typeof createServer> ) {
   const socketOrigin = process.env.SOCKET_ORIGIN ? process.env.SOCKET_ORIGIN.split(",") : true;
 
   io = new IOServer(server, {
@@ -40,7 +40,7 @@ export function initSocket(server: ReturnType<typeof createServer>) {
     });
   });
 
-  // Inicializar gerenciador de câmera
+  // INICIALIZA A CÂMERA AQUI
   initCamera(io);
 
   return io;
