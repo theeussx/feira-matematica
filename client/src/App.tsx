@@ -27,12 +27,12 @@ function Router({ logoSrc }: RouterProps) {
       <Route path="/sensors" component={Sensors} />
       <Route path="/math" component={Math} />
       <Route path="/demo" component={Demo} />
+    <Route path="/camera-transmit" component={CameraTransmit} />
       <Route path="/quiz" component={Quiz} />
       <Route path="/participants" component={Participants} />
       <Route path="/future" component={Future} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
-      <Route path="/camera-transmit" component={CameraTransmit} />
     </Switch>
   );
 }
