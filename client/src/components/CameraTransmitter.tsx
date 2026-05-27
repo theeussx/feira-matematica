@@ -11,27 +11,31 @@ export default function CameraTransmitter() {
 
   const start = async () => {
     try {
+      // Pedindo resolução HD para o celular
       const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: "environment", width: 480, height: 360 } 
+        video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } } 
       });
       if (videoRef.current) videoRef.current.srcObject = stream;
       
-      socketRef.current = io(window.location.origin, { transports: ["websocket", "polling"] });
+      socketRef.current = io(window.location.origin, { transports: ["websocket"] });
       setStreaming(true);
       
       const sendFrame = () => {
-        if (!socketRef.current?.connected || !videoRef.current) return;
+        if (!socketRef.current?.connected || !videoRef.current || !streaming) return;
         const canvas = canvasRef.current;
         if (canvas && videoRef.current) {
           const ctx = canvas.getContext("2d");
-          canvas.width = 320;
-          canvas.height = 240;
-          ctx?.drawImage(videoRef.current, 0, 0, 320, 240);
+          // Resolução de envio balanceada para 30fps não travar
+          canvas.width = 640; 
+          canvas.height = 360;
+          ctx?.drawImage(videoRef.current, 0, 0, 640, 360);
+          
           socketRef.current.emit("camera:frame", { 
-            data: canvas.toDataURL("image/jpeg", 0.3) // Qualidade baixa para não travar
+            data: canvas.toDataURL("image/jpeg", 0.6) // Qualidade 60% (ótimo equilíbrio)
           });
         }
-        setTimeout(sendFrame, 200); // 5 FPS - Começamos lento para testar
+        // 33ms = Aproximadamente 30 FPS
+        requestAnimationFrame(() => setTimeout(sendFrame, 33));
       };
       
       socketRef.current.on("connect", sendFrame);
@@ -50,11 +54,11 @@ export default function CameraTransmitter() {
 
   return (
     <div className="p-4 space-y-4 max-w-md mx-auto">
-      <video ref={videoRef} autoPlay playsInline muted className="w-full rounded-lg bg-black border" />
+      <video ref={videoRef} autoPlay playsInline muted className="w-full rounded-lg bg-black border shadow-xl" />
       <canvas ref={canvasRef} className="hidden" />
-      <Button onClick={streaming ? stop : start} className="w-full py-8 text-xl" variant={streaming ? "destructive" : "default"}>
+      <Button onClick={streaming ? stop : start} className="w-full py-8 text-xl font-bold shadow-lg" variant={streaming ? "destructive" : "default"}>
         {streaming ? <VideoOff className="mr-2" /> : <Video className="mr-2" />}
-        {streaming ? "PARAR AGORA" : "INICIAR CÂMERA"}
+        {streaming ? "ENCERRAR" : "TRANSMITIR EM HD"}
       </Button>
     </div>
   );

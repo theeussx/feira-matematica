@@ -1,20 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { Card } from "@/components/ui/card";
-import { Radio, Wifi, WifiOff } from "lucide-react";
+import { Radio, Wifi } from "lucide-react";
 
 export default function CameraViewer() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isReceiving, setIsReceiving] = useState(false);
-  const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    const socket = io(window.location.origin, { transports: ["websocket", "polling"] });
-
-    socket.on("connect", () => {
-      setConnected(true);
-      console.log("Viewer conectado!");
-    });
+    const socket = io(window.location.origin, { transports: ["websocket"] });
 
     socket.on("camera:frame", (frameData) => {
       setIsReceiving(true);
@@ -32,25 +26,24 @@ export default function CameraViewer() {
     });
 
     socket.on("camera:stop", () => setIsReceiving(false));
-    socket.on("disconnect", () => setConnected(false));
-
     return () => { socket.disconnect(); };
   }, []);
 
   return (
-    <Card className="relative w-full aspect-video bg-black overflow-hidden border-2 border-dashed border-border flex items-center justify-center">
-      <canvas ref={canvasRef} className="w-full h-full object-contain" />
+    <Card className="relative w-full h-full min-h-[350px] bg-black overflow-hidden border-none flex items-center justify-center">
+      {/* object-cover faz o vídeo preencher tudo sem sobrar bordas */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover" />
       
-      {/* Indicador de Conexão no topo */}
-      <div className="absolute top-2 right-2 z-20">
-        {connected ? <Wifi className="text-green-500 w-4 h-4" /> : <WifiOff className="text-red-500 w-4 h-4" />}
-      </div>
+      {isReceiving && (
+        <div className="absolute top-4 left-4 z-20 flex items-center gap-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold animate-pulse">
+          <div className="w-2 h-2 bg-white rounded-full" /> AO VIVO
+        </div>
+      )}
 
       {!isReceiving && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 text-white z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900 text-white z-10">
           <Radio className="w-12 h-12 mb-4 animate-pulse text-primary" />
-          <p className="font-bold">Aguardando câmera...</p>
-          <p className="text-xs opacity-70">Certifique-se que o celular iniciou a transmissão</p>
+          <p className="font-bold">AGUARDANDO SINAL HD...</p>
         </div>
       )}
     </Card>
