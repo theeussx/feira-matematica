@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Sensors from "./pages/Sensors";
+import Future from "./pages/Future";
 import Math from "./pages/Math";
 import Demo from "./pages/Demo";
 import Quiz from "./pages/Quiz";
@@ -27,8 +28,8 @@ function Router({ logoSrc }: RouterProps) {
       <Route path="/demo" component={Demo} />
       <Route path="/quiz" component={Quiz} />
       <Route path="/participants" component={Participants} />
+      <Route path="/future" component={Future} />
       <Route path="/404" component={NotFound} />
-      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );

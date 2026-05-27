@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import S20DemoSection from "@/components/S20DemoSection";
-import FutureSection from "@/components/FutureSection";
 
 export default function Demo( ) {
   const [latestData, setLatestData] = useState<any>(null);
@@ -57,7 +56,6 @@ export default function Demo( ) {
   return (
     <div className="w-full min-h-screen bg-background pt-20">
       <S20DemoSection latestData={latestData} isConnected={isConnected} />
-      <FutureSection />
     </div>
   );
 }

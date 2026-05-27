@@ -16,6 +16,7 @@ export default function Header({ logoSrc, onLogoUpload }: HeaderProps) {
   const navItems = [
     { label: "Início", path: "/" },
     { label: "Sensores", path: "/sensors" },
+    { label: "Futuro", path: "/future" },
     { label: "Matemática", path: "/math" },
     { label: "Demonstração", path: "/demo" },
     { label: "Quiz", path: "/quiz" },

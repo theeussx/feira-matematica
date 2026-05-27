@@ -52,15 +52,6 @@ export default function MathSection() {
             </Card>
           ))}
         </div>
-
-        {/* Visualização matemática */}
-        <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 border border-border/50">
-          <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663139149735/7aawHANkmKJCoetVjQXHah/math-coordinates-visual-7DFR52dK2y57XZrdeNcixa.webp"
-            alt="Visualizacao matematica de coordenadas e espacos"
-            className="w-full h-auto rounded-lg"
-          />
-        </div>
       </div>
     </section>
   );

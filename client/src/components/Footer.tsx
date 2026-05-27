@@ -17,10 +17,13 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-foreground mb-3">Seções</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">O que é AR</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Sensores</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Matemática</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Demonstração</a></li>
+              <li><a href="/home" className="hover:text-foreground transition-colors">O que é AR</a></li>
+              <li><a href="/sensors" className="hover:text-foreground transition-colors">Sensores</a></li>
+              <li><a href="/math" className="hover:text-foreground transition-colors">Matemática</a></li>
+              <li><a href="/demo" className="hover:text-foreground transition-colors">Demonstração</a></li>
+              <li><a href="/future" className="hover:text-foreground transition-colors">Futuro</a></li>
+              <li><a href="/quiz" className="hover:text-foreground transition-colors">Quiz</a></li>
+              <li><a href="/participants" className="hover:text-foreground transition-colors">Participantes</a></li>
             </ul>
           </div>
 
@@ -28,7 +31,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-foreground mb-3">Tecnologias</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>React 19</li>
+              <li>React</li>
               <li>TypeScript</li>
               <li>Tailwind CSS 4</li>
               <li>Realidade Aumentada</li>
