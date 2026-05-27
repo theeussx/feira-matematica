@@ -15,6 +15,7 @@ import Participants from "./pages/Participants";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CameraTransmit from "./pages/CameraTransmit";
+import CameraViewer from "./pages/CameraViewer";
 
 interface RouterProps {
   logoSrc: string | null;
@@ -27,7 +28,8 @@ function Router({ logoSrc }: RouterProps) {
       <Route path="/sensors" component={Sensors} />
       <Route path="/math" component={Math} />
       <Route path="/demo" component={Demo} />
-    <Route path="/camera-transmit" component={CameraTransmit} />
+      <Route path="/camera-transmit" component={CameraTransmit} />
+      <Route path="/camera-viewer" component={CameraViewer} />
       <Route path="/quiz" component={Quiz} />
       <Route path="/participants" component={Participants} />
       <Route path="/future" component={Future} />
