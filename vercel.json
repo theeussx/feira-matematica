@@ -4,6 +4,16 @@
   "installCommand": "npm ci",
   "framework": "vite",
   "outputDirectory": "dist",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "server/index.ts": {
+      "runtime": "nodejs18.x",
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
   "routes": [
     {
       "src": "/api/sensors/(.*)",
@@ -21,6 +31,17 @@
       "src": "/(.*)",
       "dest": "dist/public/index.html",
       "status": 200
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
     }
   ]
 }
