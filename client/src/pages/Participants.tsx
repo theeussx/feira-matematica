@@ -6,7 +6,7 @@ export default function Participants() {
     {
       id: 1,
       name: "Mateus Henrique",
-      role: "Desenvolvedor full stack",
+      role: "Desenvolvedor full-stack",
       image: "/image/participants/mateus.png",
     },
     {
