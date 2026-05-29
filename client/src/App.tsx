@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -52,11 +51,9 @@ function App() {
         defaultTheme="light"
         switchable
       >
-        <TooltipProvider>
-          <Header logoSrc={logoSrc} onLogoUpload={handleLogoUpload} />
-          <Router logoSrc={logoSrc} />
-          <Footer />
-        </TooltipProvider>
+        <Header logoSrc={logoSrc} onLogoUpload={handleLogoUpload} />
+        <Router logoSrc={logoSrc} />
+        <Footer />
       </ThemeProvider>
     </ErrorBoundary>
   );
