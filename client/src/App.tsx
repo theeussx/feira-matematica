@@ -1,5 +1,4 @@
 import { useState } from "react";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -14,6 +13,26 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CameraTransmit from "./pages/CameraTransmit";
 import CameraViewer from "./pages/CameraViewer";
+
+// Componente NotFound inline para evitar completamente erros de importação na Vercel
+function NotFound() {
+  return (
+    <div style={{ 
+      textAlign: "center", 
+      padding: "80px 20px", 
+      minHeight: "60vh", 
+      display: "flex", 
+      flexDirection: "column", 
+      justifyContent: "center", 
+      alignItems: "center",
+      fontFamily: "sans-serif"
+    }}>
+      <h1 style={{ fontSize: "2.5rem", marginBottom: "16px", color: "#333" }}>404</h1>
+      <h2 style={{ fontSize: "1.5rem", marginBottom: "10px", color: "#666" }}>Página não encontrada</h2>
+      <p style={{ color: "#888" }}>O caminho que você tentou acessar não existe ou foi movido.</p>
+    </div>
+  );
+}
 
 interface RouterProps {
   logoSrc: string | null;
@@ -37,7 +56,7 @@ function Router({ logoSrc }: RouterProps) {
   );
 }
 
-function App() {
+export default function App() {
   const [logoSrc, setLogoSrc] = useState<string | null>(null);
 
   const handleLogoUpload = (file: File | null) => {
@@ -47,10 +66,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        switchable
-      >
+      <ThemeProvider defaultTheme="light" switchable>
         <Header logoSrc={logoSrc} onLogoUpload={handleLogoUpload} />
         <Router logoSrc={logoSrc} />
         <Footer />
@@ -58,5 +74,3 @@ function App() {
     </ErrorBoundary>
   );
 }
-
-export default App;
