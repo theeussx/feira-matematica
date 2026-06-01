@@ -1,4 +1,4 @@
-import MathSection from "@/components/MathSection";
+import MathSection from "../components/MathSection";
 
 export default function Math() {
   return (

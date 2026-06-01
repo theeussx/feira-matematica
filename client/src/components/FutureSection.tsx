@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "../components/ui/card";
 import { GraduationCap, Stethoscope, Gamepad2, Wrench, MapPin, Accessibility } from "lucide-react";
 
 export default function FutureSection() {

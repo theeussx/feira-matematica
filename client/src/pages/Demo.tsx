@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import S20DemoSection from "@/components/S20DemoSection";
+import S20DemoSection from "../components/S20DemoSection";
 
 export default function Demo( ) {
   const [latestData, setLatestData] = useState<any>(null);

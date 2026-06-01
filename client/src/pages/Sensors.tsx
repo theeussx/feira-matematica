@@ -1,4 +1,4 @@
-import SensorsSection from "@/components/SensorsSection";
+import SensorsSection from "../components/SensorsSection";
 
 export default function Sensors() {
   return (

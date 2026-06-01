@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { io } from "socket.io-client";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { Video, VideoOff } from "lucide-react";
 
 export default function CameraTransmitter() {

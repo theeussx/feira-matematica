@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "../components/ui/card";
 import { Zap, Eye, Smartphone, Layers } from "lucide-react";
 
 export default function ARExplainedSection() {

@@ -1,4 +1,4 @@
-import FutureSection from "@/components/FutureSection";
+import FutureSection from "../components/FutureSection";
 
 export default function Future() {
   return (

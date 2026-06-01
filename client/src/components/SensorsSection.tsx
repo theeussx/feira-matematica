@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "../components/ui/card";
 import { Compass, Zap, Radio, Camera } from "lucide-react";
 
 export default function SensorsSection() {

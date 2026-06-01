@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "../components/ui/card";
 import { Activity, Radio, Zap } from "lucide-react";
 import CameraViewer from "./CameraViewer"; // 1. ADICIONE ESTE IMPORT
 

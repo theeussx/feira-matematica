@@ -1,4 +1,4 @@
-import QuizSection from "@/components/QuizSection";
+import QuizSection from "../components/QuizSection";
 
 export default function Quiz() {
   return (

@@ -1,4 +1,4 @@
-import CameraTransmitter from "@/components/CameraTransmitter";
+import CameraTransmitter from "../components/CameraTransmitter";
 export default function CameraTransmit() {
   return (
     <div className="container mx-auto py-20">
