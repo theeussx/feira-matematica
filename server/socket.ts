@@ -1,6 +1,6 @@
 import { Server as IOServer } from "socket.io";
 import { createServer } from "http";
-import { initCamera } from "./camera"; // Importação da câmera
+import { initCamera } from "./camera.js"; // Importação da câmera
 
 let io: IOServer | null = null;
 let latestSensorState: any = null;

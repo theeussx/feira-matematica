@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import { z } from "zod";
-import { getDb } from "../db";
-import { getIo, setLatestSensorState } from "../socket";
-import { sensorData } from "../../drizzle/shema";
+import { getDb } from "../db.js";
+import { getIo, setLatestSensorState } from "../socket.js";
+import { sensorData } from "../../drizzle/shema.js";
 
 const router = express.Router();
 

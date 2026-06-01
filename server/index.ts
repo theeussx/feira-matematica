@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
 import { createServer } from "http";
-import { initSocket } from "./socket";
+import { initSocket } from "./socket.js";
 import * as path from "path";
 import { fileURLToPath } from "url";
 import * as fs from "fs";
-import sensorsRouter from "./routes/sensorsRoutes";
+import sensorsRouter from "./routes/sensorsRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
