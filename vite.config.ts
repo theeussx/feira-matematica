@@ -2,6 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -10,17 +13,12 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@": path.resolve(__dirname, "client/src"),
     },
   },
-  envDir: path.resolve(import.meta.dirname),
-  // Define que a raiz do frontend está na pasta 'client'
-  root: path.resolve(import.meta.dirname, "client"),
+  root: "client",
   build: {
-    // Alvo final exato que o seu vercel.json precisa ler
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: "../dist/public",
     emptyOutDir: true,
   }
 });
