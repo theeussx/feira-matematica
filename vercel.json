@@ -4,14 +4,10 @@
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "vite",
   "outputDirectory": "dist",
-  "public": "dist/public",
+  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
-    },
-    {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
