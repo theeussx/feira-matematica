@@ -1,5 +1,5 @@
-import HeroSection from "@/components/HeroSection";
-import ARExplainedSection from "@/components/ARExplainedSection";
+import HeroSection from "../components/HeroSection";
+import ARExplainedSection from "../components/ARExplainedSection";
 
 interface HomeProps {
   logoSrc: string | null;
@@ -17,4 +17,3 @@ export default function Home({ logoSrc }: HomeProps) {
     </div>
   );
 }
-
