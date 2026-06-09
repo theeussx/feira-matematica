@@ -28,8 +28,8 @@ Este é um **projeto educativo completo** desenvolvido para uma Feira de Matemá
 - **🎨 Design Minimalista Moderno** - Interface limpa com Tailwind CSS 4 e componentes Radix UI
 - **⚡ Demonstração ao Vivo** - Simulador de sensores em tempo real no navegador
 - **📱 Integração com Sensores Reais** - Recebe dados de acelerômetro e giroscópio via API REST
-- **🗄️ Backend Robusto** - Express.js com MySQL para persistência de dados
-- **🐳 Containerizado** - Dockerfile pronto para deploy em Render, Vercel, ou qualquer plataforma
+- **🌐 Deploy Estático** - Otimizado para hospedagem na Vercel como um site estático (SPA)
+- **⚡ Sem Back-end** - Funciona de forma independente, ideal para demonstrações e feiras
 - **📊 Visualização 3D** - Representação visual do movimento do dispositivo
 - **🎓 Conteúdo Educativo** - 7 seções explicando conceitos de AR e matemática
 
