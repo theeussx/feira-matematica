@@ -101,7 +101,7 @@ export default function Participants() {
 
                   {participant.id === 1 ? (
                     <a
-                      href="https://theeussx.vercel.app/"
+                      href="https://theeussx.online/"
                       target="_blank"
                       rel="noreferrer"
                       className="mt-4 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary/90"
